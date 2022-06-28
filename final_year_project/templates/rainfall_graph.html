@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainfall Graph</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<div class="header">
+  <h1>Flood Prediction</h1>
+</div>
+
+
+<div id="navbar">
+	<a class="material-icons" style="font-size:23px" href="/index">&#xe88a;</a>
+	<a href="/aboutafterlogin" title="about">About</a>
+    <a href="/rainfall_analysis_predict" title="Rainfall prediction">Rainfall Analysis</a>
+	<a href="/predict" title="Predict">Flood Prediction</a>
+	  <div class="topnav-right">
+		  <a href="/logout" title="Logout">Logout</a>
+        <a class="material-icons" style="font-size:23px" href="/user_account">&#xe7ff;</a>
+		  <a href="/helpafterlogin" title="contact us">&#9742</a>
+	  </div>
+</div>
+
+<body>
+  <div id='chart' class='chart'></div>
+</body>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>-->
+<script type='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+
+  window.onscroll = function() {myFunction()};
+  
+  var navbar = document.getElementById("navbar");
+  var sticky = navbar.offsetTop;
+  
+  function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
+  </script>
+</html>

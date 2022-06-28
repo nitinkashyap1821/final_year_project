@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>Home</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+<body>
+<div class="header">
+  <h1>Flood Prediction</h1>
+</div>
+
+
+<div id="navbar">
+  <a class="material-icons" style="font-size:23px" href="/home">&#xe88a;</a>
+  <a href="/about" title="about">About</a>
+    <div class="topnav-right">
+      <a href="/user_login" title="signin">Login</a>
+        <a href="/user_register" title="signup">Signup</a>
+        <a href="/help" title="contact us">&#9742</a>
+    </div>
+</div>
+
+
+
+
+
+<div class="content">
+<p style=" color:black;">
+
+    </p>
+</div>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+
+
+
+</body>
+</html>
