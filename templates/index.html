@@ -22,6 +22,16 @@
           <a href="/helpafterlogin" title="contact us">&#9742</a>
       </div>
 </div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+    
+        alert(messages[0]);
+      
+    </script>
+  {% endif %}
+{% endwith %}
 
 
 <script>
