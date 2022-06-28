@@ -1,0 +1,129 @@
+<html>
+	<head>
+		<title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+        form {
+  width: 350px;
+  position: relative;
+}
+form .form-field::before {
+  font-size: 20px;
+  position: absolute;
+  left: 15px;
+  top: 17px;
+  color: #888888;
+  content: " ";
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+form .form-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+form input {
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+  background-color: #fff;
+  border-radius: 4px;
+  border: none;
+  display: block;
+  padding: 0.9rem 0.7rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 17px;
+  color: #4A4A4A;
+  text-indent: 40px;
+}
+form .btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0.9rem 2.5rem;
+  text-align: center;
+  background-color: #47AB11;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 17px;
+}
+    </style></head>
+<body><div class="header">
+  <h1>Flood Prediction</h1>
+</div>
+
+
+<div id="navbar">
+  <a class="material-icons" style="font-size:23px" href="/home">&#xe88a;</a>
+  <a href="/about" title="about">About</a>
+    <div class="topnav-right">
+      <a href="/user_login" title="signin">Login</a>
+        <a href="/user_register" title="signup">Signup</a>
+        <a href="/help" title="contact us">&#9742</a>
+    </div>
+</div>
+    <br><br><center>
+    <h2> Signup</h2>
+    <form method="post">
+        <div class="form-field">
+          <input type="text" placeholder="Name" name="uname" required/>
+        </div>
+        <div class="form-field">
+            <input type="email" placeholder="Email" name="email" required/>
+          </div>
+          <div class="form-field">
+            <input list="Gender" placeholder="Gender" name = "gender" required/>
+          <datalist id="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </datalist>
+        </input>
+          </div>
+          <div class="form-field">
+            <input type="password" placeholder="Password" name="psw" required/>                        
+         </div>
+        <div>
+            <input type="number" placeholder="Age" name="age" required/> 
+        </div>
+        <br>
+        <div class="form-field">
+          <button class="btn" type="submit">Sign Up</button>
+        </div>
+      </form>
+    </center>
+
+    
+
+
+
+    <script>
+      window.onscroll = function() {myFunction()};
+      
+      var navbar = document.getElementById("navbar");
+      var sticky = navbar.offsetTop;
+      
+      function myFunction() {
+        if (window.pageYOffset >= sticky) {
+          navbar.classList.add("sticky")
+        } else {
+          navbar.classList.remove("sticky");
+        }
+      }
+      </script>
+</body>
+</html>
