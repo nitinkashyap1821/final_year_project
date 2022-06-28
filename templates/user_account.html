@@ -23,16 +23,7 @@
       </div>
 </div>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <script>
-      var messages = {{ messages | safe }};
-    
-        alert(messages[0]);
-      
-    </script>
-  {% endif %}
-{% endwith %}
+
 </body>
 		<br><br><br><br><br><br><br><br><br><br><center>
 		<h2>USER DETAILS</h2>
