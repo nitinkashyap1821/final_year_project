@@ -146,7 +146,7 @@ def about():
 
 # --------------------------------------help_page-------------------------------------------------------------------------
 @app.route("/help")
-def helping():
+def help():
     return render_template('help.html')
 
 
