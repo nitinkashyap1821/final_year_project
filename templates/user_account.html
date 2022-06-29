@@ -20,6 +20,35 @@
   align-items: center;
   margin-bottom: 1rem;
   position: relative;
+  padding-right: 50px;
+}
+
+.form-field::before {
+  font-size: 20px;
+  position: absolute;
+  left: 15px;
+  top: 17px;
+  color: #888888;
+  content: " ";
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+  
+input {
+  font-family: inherit;
+  width: 50%;
+  outline: none;
+  background-color: #fff;
+  border-radius: 4px;
+  
+  border: none;
+  display: block;
+  padding: 0.9rem 0.5rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 17px;
+  color: #4A4A4A;
+  text-indent: 40px;
 }
         </style>
 	</head>
@@ -30,7 +59,7 @@
 
 
 <div id="navbar">
-	<a class="material-icons" style="font-size:23px" href="/index">&#xe88a;</a>
+	<a class="material-icons" style="font-size:30px" href="/index">&#xe88a;</a>
     <a href="/aboutafterlogin" title="about">About</a>
     <a href="/predict.html"title="Predict">Flood Prediction</a>
     <a href="/rainfall_predict"title="Rainfall prediction">Rainfall Prediction</a>  
@@ -45,19 +74,21 @@
 </body>
 	<br><div class="bor" style="height:450px;width:600px;border:solid 2px rgb(13, 13, 13);">
   <center> <i class="material-icons" style="font-size:80px">account_circle</i></center><br><br>
-   &nbsp &nbsp  NAME: <div class="form-field">
-    <input value={{details['name']}}>
+  <div class="form-field">
+      &nbsp &nbsp NAME <input value={{details['name']}}>
   </div>
-   &nbsp &nbsp AGE: <div class="form-field">
+    <div class="form-field">
+      &nbsp &nbsp AGE
     <input value={{details['age']}}>
   </div>
-   &nbsp &nbsp GENDER: <div class="form-field">
+    <div class="form-field">
+      &nbsp &nbsp GENDER 
     <input value={{details['gender']}}>
   </div>
-   &nbsp &nbsp Email: <div class="form-field">
+    <div class="form-field">
+      &nbsp &nbsp Email 
     <input value={{details['email']}}>
-  </div>
-
+  </div> 
 </div>
 
 
