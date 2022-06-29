@@ -1,55 +1,26 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<title>main</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
-          .bor{
-  margin-left: 450px;
-          }
-          .form-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  position: relative;
-  padding-right: 50px;
+        body {
+    font-family: Arial, Helvetica, sans-serif;
 }
+.form {
+    background-color: white;
+    width: 50vw;
+    margin: 50px auto;
+    padding: 20px 50px;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    border-radius: 12px;
+}
+td{
+width:50%;}
 
-.form-field::before {
-  font-size: 20px;
-  position: absolute;
-  left: 15px;
-  top: 17px;
-  color: #888888;
-  content: " ";
-  display: block;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-  
-input {
-  font-family: inherit;
-  width: 50%;
-  outline: none;
-  background-color: #fff;
-  border-radius: 4px;
-  
-  border: none;
-  display: block;
-  padding: 0.9rem 0.5rem;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  font-size: 17px;
-  color: #4A4A4A;
-  text-indent: 40px;
-}
+
         </style>
 	</head>
 <body>
@@ -72,24 +43,33 @@ input {
 
 
 </body>
-	<br><div class="bor" style="height:450px;width:600px;border:solid 2px rgb(13, 13, 13);">
-  <center> <i class="material-icons" style="font-size:80px">account_circle</i></center><br><br>
-  <div class="form-field">
-      &nbsp &nbsp NAME <input value={{details['name']}}>
-  </div>
-    <div class="form-field">
-      &nbsp &nbsp AGE
-    <input value={{details['age']}}>
-  </div>
-    <div class="form-field">
-      &nbsp &nbsp GENDER 
-    <input value={{details['gender']}}>
-  </div>
-    <div class="form-field">
-      &nbsp &nbsp Email 
-    <input value={{details['email']}}>
-  </div> 
-</div>
+    <br>
+<section id="prediction-form" class="form">
+    <br>
+    <div style="text-align:center;">
+    <i style="font-size:80px;" class="fa">&#xf2bd;</i>
+    </div>
+    <br>
+  <table class="center">
+  <tr>
+    <td class="left">Name</td>
+    <td>{{details['name']}}</td>
+  </tr>
+  <tr>
+    <td class="left">Age</td>
+    <td>{{details['age']}}</td>
+  </tr>
+  <tr>
+    <td class="left">Gender</td>
+    <td>{{details['gender']}}</td>
+
+  </tr>
+  <tr>
+    <td class="left">Email</td>
+    <td>{{details['email']}}</td>
+</table>
+
+</section>
 
 
     <script>

@@ -178,8 +178,8 @@ def user_login():
         l = len(cur.fetchall())
         if l > 0:
             flash(f'Successfully Logged in')
-            session['uname']=email
-            session['psw']=password
+            session['uname'] = email
+            session['psw'] = password
             return render_template('index.html')
         else:
             print('hello')
@@ -192,9 +192,11 @@ def user_login():
 def index():
     return render_template('index.html')
 
+
 @app.route('/aboutafterlogin')
 def aboutafterlogin():
     return render_template('aboutafterlogin.html')
+
 
 # -------------------------------------user_register_page-------------------------------------------------------------------------
 
@@ -234,14 +236,14 @@ def rainfall_analysis_predict():
 
         fig = px.bar(subDivision, x=subDivision.index, y=subDivision.values)
         fig.update_layout(
-        title=text,
-        xaxis_title="Months",
-        yaxis_title="Rainfall (in mm)",
-        legend_title="Legend Title",
+            title=text,
+            xaxis_title="Months",
+            yaxis_title="Rainfall (in mm)",
+            legend_title="Legend Title",
         )
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('rainfall_graph.html', graphJSON=graphJSON)
-        
+
     else:
         return render_template("rainfall_analysis_predict.html")
 
@@ -308,9 +310,12 @@ def rainfall_analysis_predict():
 def flood():
     return render_template('flood.html')
 
+
 @app.route("/noflood")
 def noflood():
     return render_template('noflood.html')
+
+
 # -------------------------------------
 
 @app.route('/predict', methods=['POST', 'GET'])
@@ -330,46 +335,47 @@ def predict():
         NOV = request.form['Nov']
         DEC = request.form['Dec']
 
-        sd= {'ANDAMAN & NICOBAR ISLANDS': 0,
-         'ARUNACHAL PRADESH': 1,
-         'ASSAM & MEGHALAYA': 2,
-         'NAGA MANI MIZO TRIPURA': 21,
-         'SUB HIMALAYAN WEST BENGAL & SIKKIM': 28,
-         'GANGETIC WEST BENGAL': 10,
-         'ORISSA': 23,
-         'JHARKHAND': 15,
-         'BIHAR': 3,
-         'EAST UTTAR PRADESH': 9,
-         'WEST UTTAR PRADESH': 35,
-         'UTTARAKHAND': 31,
-         'HARYANA DELHI & CHANDIGARH': 12,
-         'PUNJAB': 24,
-         'HIMACHAL PRADESH': 13,
-         'JAMMU & KASHMIR': 14,
-         'WEST RAJASTHAN': 34,
-         'EAST RAJASTHAN': 8,
-         'WEST MADHYA PRADESH': 33,
-         'EAST MADHYA PRADESH': 7,
-         'GUJARAT REGION': 11,
-         'SAURASHTRA & KUTCH': 26,
-         'KONKAN & GOA': 17,
-         'MADHYA MAHARASHTRA': 19,
-         'MATATHWADA': 20,
-         'VIDARBHA': 32,
-         'CHHATTISGARH': 4,
-         'COASTAL ANDHRA PRADESH': 5,
-         'TELANGANA': 30,
-         'RAYALSEEMA': 25,
-         'TAMIL NADU': 29,
-         'COASTAL KARNATAKA': 6,
-         'NORTH INTERIOR KARNATAKA': 22,
-         'SOUTH INTERIOR KARNATAKA': 27,
-         'KERALA': 16,
-         'LAKSHADWEEP': 18}
+        sd = {'ANDAMAN & NICOBAR ISLANDS': 0,
+              'ARUNACHAL PRADESH': 1,
+              'ASSAM & MEGHALAYA': 2,
+              'NAGA MANI MIZO TRIPURA': 21,
+              'SUB HIMALAYAN WEST BENGAL & SIKKIM': 28,
+              'GANGETIC WEST BENGAL': 10,
+              'ORISSA': 23,
+              'JHARKHAND': 15,
+              'BIHAR': 3,
+              'EAST UTTAR PRADESH': 9,
+              'WEST UTTAR PRADESH': 35,
+              'UTTARAKHAND': 31,
+              'HARYANA DELHI & CHANDIGARH': 12,
+              'PUNJAB': 24,
+              'HIMACHAL PRADESH': 13,
+              'JAMMU & KASHMIR': 14,
+              'WEST RAJASTHAN': 34,
+              'EAST RAJASTHAN': 8,
+              'WEST MADHYA PRADESH': 33,
+              'EAST MADHYA PRADESH': 7,
+              'GUJARAT REGION': 11,
+              'SAURASHTRA & KUTCH': 26,
+              'KONKAN & GOA': 17,
+              'MADHYA MAHARASHTRA': 19,
+              'MATATHWADA': 20,
+              'VIDARBHA': 32,
+              'CHHATTISGARH': 4,
+              'COASTAL ANDHRA PRADESH': 5,
+              'TELANGANA': 30,
+              'RAYALSEEMA': 25,
+              'TAMIL NADU': 29,
+              'COASTAL KARNATAKA': 6,
+              'NORTH INTERIOR KARNATAKA': 22,
+              'SOUTH INTERIOR KARNATAKA': 27,
+              'KERALA': 16,
+              'LAKSHADWEEP': 18}
         print(SUBDIVISION)
 
-        out = lr.predict([[sd[SUBDIVISION], float(JAN), float(FEB), float(MAR), float(APR), float(MAY), float(JUN), float(JUL),
-                           float(AUG), float(SEP), float(OCT), float(NOV), float(DEC)]])
+        out = lr.predict(
+            [[sd[SUBDIVISION], float(JAN), float(FEB), float(MAR), float(APR), float(MAY), float(JUN), float(JUL),
+              float(AUG), float(SEP), float(OCT), float(NOV), float(DEC)]])
         if out[0] == 0:
             return redirect(url_for('noflood'))
         else:
@@ -413,16 +419,16 @@ def user_account():
     print("a")
     cur = conn.cursor()
     print("b")
-    email=session['uname']
-    password=session['psw']
+    email = session['uname']
+    password = session['psw']
     count = cur.execute('SELECT * FROM user WHERE email = "%s" AND password = "%s"' % (email, password))
-    userdetails=cur.fetchall()[0]
-    d=dict()
-    d['name']=userdetails[0]
-    d['email']=userdetails[1]
-    d['gender']=userdetails[3]
-    d['age']=userdetails[4]
-    return render_template('user_account.html',details=d)
+    userdetails = cur.fetchall()[0]
+    d = dict()
+    d['name'] = userdetails[0]
+    d['email'] = userdetails[1]
+    d['gender'] = userdetails[3]
+    d['age'] = userdetails[4]
+    return render_template('user_account.html', details=d)
 
 
 @app.route("/logout")
@@ -430,6 +436,7 @@ def logout():
     session['logged_in'] = False
     return render_template('home.html')
 
+
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)
-    app.run(debug=False)
+    app.run(debug=True)
