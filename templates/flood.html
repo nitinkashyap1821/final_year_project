@@ -5,11 +5,29 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+          .blink {
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+        </style>
 	</head>
 <body>
-<div class="header">
-  <h1>Flood Prediction</h1>
-</div>
+  <div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 1550px 200px;background-repeat: no-repeat; height: 140px;">
+    <h1 style="color:white"><b>Flood Prediction</b></h1> <img class="logo" src="{{ url_for('static', filename='7.png')}}"  style="height:200px; width:250px;">
+  
+  </div>
 
 
 <div id="navbar">
@@ -22,11 +40,25 @@
       <a class="material-icons" style="font-size:23px" href="/user_account">&#xe7ff;</a>
         <a href="/helpafterlogin" title="contact us">&#9742</a>
     </div>
-</div>
-	
+</div><br><br>
+<center>
+<div class="blink"><img class="logo" src="{{ url_for('static', filename='1.jpg')}}"  style="height:200px; width:250px;"></div>
+<p> <h1>There is a high probablity of flood occurrence.</h1></p>
+<p><h2>Emergency Kit</h2>
 
-
-<h1>Flood</h1>
+<li>Battery operated torch</li><li>
+Extra batteries</li><li>
+Battery operated radio</li><li>
+First aid kit and essential medicines</li><li>
+Emergency food (dry items) and water (packed and sealed)</li><li>
+Candles and matches in a waterproof container</li><li>
+Knife</li><li>
+Chlorine tablets or powdered water</li><li>
+Important documents (Ration card, Voter ID card, Aadhar Card etc.)</li><li>
+Cash, Aadhar Card and Ration Card</li><li>
+Thick ropes and cords</li><li>
+Shoes</li>
+In case of emergency call helpline numbers which is available in <a href="/helpafterlogin">help</a> page of our website</p></center>
 
 <script>
   window.onscroll = function() {myFunction()};

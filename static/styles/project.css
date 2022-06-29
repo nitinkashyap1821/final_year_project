@@ -10,6 +10,11 @@ body {
   text-align: center;
 }
 
+div.header img.logo {
+  position: absolute;
+  right: -10px; top: -5px;
+}
+
 #navbar {
   overflow: hidden;
   background-color: #333;
