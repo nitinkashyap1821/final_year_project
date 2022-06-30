@@ -1,37 +1,247 @@
 <html>
 	<head>
-		<title>main</title>
+
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/project.css')}}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Rainfall Prediction</title>
 	</head>
-<body>
-  <div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 100% 200px;background-repeat: no-repeat; height: 140px;">
+    <style>
+        body {
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+.form {
+    background-color: white;
+    width: 70vw;
+    margin: 50px auto;
+    padding: 20px 50px;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    border-radius: 12px;
+}
+
+.button {
+    padding: 5px 30px;
+    font-size: 18px;
+}
+
+.center-btn{
+text-align:center;
+}
+    </style>
+
+<div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 100% 200px;background-repeat: no-repeat; height: 180px;">
     <h1 style="color:white"><b>Flood Prediction</b></h1> <img class="logo" src="{{ url_for('static', filename='7.png')}}"  style="height:200px; width:250px;">
-  
+
   </div>
 
+
 <div id="navbar">
-	<a class="material-icons" style="font-size:23px" href="/index">&#xe88a;</a>
+  <a class="material-icons" style="font-size:23px" href="/index">&#xe88a;</a>
   <a href="/aboutafterlogin" title="about">About</a>
     <a href="/rainfall_analysis_predict"title="Rainfall prediction">Rainfall Analysis</a>
-  <a href="/predict"title="Predict">Flood Prediction</a>
-	  <div class="topnav-right">
-		<a href="/logout" title="Logout">Logout</a>
-        <a class="material-icons" style="font-size:23px" href="/user_account" title="contact us">&#xf2bd;</a>
-		  <a href="/helpafterlogin" title="contact us">&#9742</a>
-	  </div>
+  <a href="/rainfall_predict"title="Predict">Rainfall Prediction</a>
+    <a href="/predict"title="Predict">Flood Prediction</a>
+
+    <div class="topnav-right">
+        <a href="/logout" title="Logout">Logout</a>
+        <a class="material-icons" style="font-size:23px" href="/user_account">&#xe7ff;</a>
+        <a href="/helpafterlogin" title="contact us">&#9742</a>
+    </div>
 </div>
-	
+    <body style="background-image: url(static/cloud.jpg);background-repeat: no-repeat;">
 
+<section id="prediction-form">
+        <form class="form" action="#" method="POST">
+            <h1 class="my-3 text-center">Rainfall Predictor</h1>
+        <br>
+            <div class="row">
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="month">Month</label>
+                        <select class="form-control" name="month" id="month" required>
+                        <option value="">Choose a Month</option>
+                         <option value='January'>January</option>
+                         <option value='February'>February</option>
+                         <option value='March'>March</option>
+                         <option value='April'>April</option>
+                         <option value='May'>May</option>
+                         <option value='June'>June</option>
+                         <option value='July'>July</option>
+                         <option value='August'>August</option>
+                         <option value='September'>September</option>
+                         <option value='October'>October</option>
+                         <option value='September'>November</option>
+                         <option value='September'>December</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="day">Day</label>
+                        <select class="form-control" name="day" id="day" required>
+                        <option value="">Choose a Day</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                            <option value='6'>6</option>
+                            <option value='7'>7</option>
+                            <option value='8'>8</option>
+                            <option value='9'>9</option>
+                            <option value='10'>10</option>
+                            <option value='11'>11</option>
+                            <option value='12'>12</option>
+                            <option value='13'>13</option>
+                            <option value='14'>14</option>
+                            <option value='15'>15</option>
+                            <option value='16'>16</option>
+                            <option value='17'>17</option>
+                            <option value='18'>18</option>
+                            <option value='19'>19</option>
+                            <option value='20'>20</option>
+                            <option value='21'>21</option>
+                            <option value='22'>22</option>
+                            <option value='23'>23</option>
+                            <option value='24'>24</option>
+                            <option value='25'>25</option>
+                            <option value='26'>26</option>
+                            <option value='27'>27</option>
+                            <option value='28'>28</option>
+                            <option value='29'>29</option>
+                            <option value='30'>30</option>
+                            <option value='31'>31</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="tempLow">Temperature (Low)</label>
+                        <input class="form-control" type="text" id="tempLow" name="tempLow" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="tempAvg">Temperature (Avg)</label>
+                        <input class="form-control" type="text" id="tempAvg" name="tempAvg" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="tempHigh">Temperature (High)</label>
+                      <input class="form-control" type="text" id="tempHigh" name="tempHigh" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="DPLow">Dew Point (Low)</label>
+                        <input type="text" id="DPLow" name="DPLow" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="DPAvg">Dew Point (Avg)</label>
+                        <input type="text" id="DPAvg" name="DPAvg" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="DPHigh">Dew Point (High)</label>
+                        <input type="text" id="DPHigh" name="DPHigh" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="humidityLow">Humidity (Low)</label>
+                        <input type="text" id="humidityLow" name="humidityLow" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="humidityAvg">Humidity (Avg)</label>
+                        <input type="text" id="humidityAvg" name="humidityAvg" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="humidityHigh">Humidity (High)</label>
+                        <input type="text" id="humidityHigh" name="humidityHigh" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="SLPLow">Sea Level Pressure (Low)</label>
+                        <input type="text" id="SLPLow" name="SLPLow" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="SLPAvg">Sea Level Pressure (Avg)</label>
+                        <input type="text" id="SLPAvg" class="form-control" name="SLPAvg" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="SLPHigh">Sea Level Pressure (High)</label>
+                         <input type="text" class="form-control" id="SLPHigh" name="SLPHigh" value="0">
+                        </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="visibilityLow">Visibility (Low)</label>
+                        <input type="text" id="visibilityLow" name="visibilityLow" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="visibilityAvg">Visibility (Avg)</label>
+                        <input type="text" id="visibilityAvg" name="visibilityAvg" value="0" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="visibilityHigh">Visibility (High)</label>
+                        <input type="text" class="form-control" id="visibilityHigh" name="visibilityHigh" value="0">
+                    </div>
+                </div>
 
+                <div class="col-md-6 my-2">
+                    <div class="md-form">
+                        <label for="windAvg">Wind Speed (Avg)</label>
+                        <input class="form-control" type="text" id="windAvg" name="windAvg" value="0"><br><br>
+                    </div>
+                </div>
+              <br><br>
+                <div class="center-btn">
+                  <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                <br><br>
+                </div>
+
+                <center>
+                {% with messages = get_flashed_messages() %}
+                    {%if messages%}
+                        {%for msg in messages%}
+                            <p>The Rainfall will be approximately {{msg}}mm</p>
+                        {%endfor%}
+                    {%endif%}
+                {% endwith %}
+                </center>
+            </div>
+        </form>
+    </section>
 
 <script>
   window.onscroll = function() {myFunction()};
-  
+
   var navbar = document.getElementById("navbar");
   var sticky = navbar.offsetTop;
-  
+
   function myFunction() {
     if (window.pageYOffset >= sticky) {
       navbar.classList.add("sticky")
@@ -39,6 +249,9 @@
       navbar.classList.remove("sticky");
     }
   }
+
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
 </body>
 </html>

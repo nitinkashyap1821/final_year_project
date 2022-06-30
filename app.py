@@ -1,13 +1,19 @@
+# include packages
 import json
 import os
+import sqlite3
 import warnings
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+import plotly
+import plotly.express as px
+from sklearn import preprocessing
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 warnings.filterwarnings('ignore')
 # -------------------------------------------------model_code------------------------------------------------------------
-import sqlite3
-
-import plotly
-import plotly.express as px
 
 conn = sqlite3.connect('rainfall_database')
 cur = conn.cursor()
@@ -23,54 +29,27 @@ try:
 
 except:
     pass
-# !/usr/bin/env python
-# coding: utf-8
 
-
-# include packages
-import pandas as pd
-
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-
-# reading the dataset
-dataset = pd.read_csv("Daily Rainfall dataset.csv")
-dataset.head()
-
-from sklearn.model_selection import train_test_split
-
-predictors = dataset.drop(["year", "Rainfall"], axis=1)
-target = dataset["Rainfall"]
-
+# used for rainfall prediction
+rain_dataset = pd.read_csv("Daily Rainfall dataset.csv")
+predictors = rain_dataset.drop(["year", "Rainfall"], axis=1)
+target = rain_dataset["Rainfall"]
 X_train, X_test, Y_train, Y_test = train_test_split(predictors, target, test_size=0.20, random_state=0)
-
-from sklearn.linear_model import LinearRegression
-from sklearn import preprocessing
-
-lr = LinearRegression()
-
+lr_RP = LinearRegression()
 lab_enc = preprocessing.LabelEncoder()
 Y_train = lab_enc.fit_transform(Y_train)
+lr_RP.fit(X_train, Y_train)
+Y_pred_lr = lr_RP.predict(X_test)
+score_lr = lr_RP.score(X_test, Y_test)
+print("The accuracy score achieved using Logistic regression is: " + str(10 * score_lr) + " %")
 
-lr.fit(X_train, Y_train)
+# ----------------------------------------------------------------------------------------------------------------------
 
-Y_pred_lr = lr.predict(X_test)
-
-score_lr = lr.score(X_test, Y_test)
-print("The accuracy score achieved using Logistic regression is: " + str(score_lr) + " %")
-
-data1 = pd.read_csv('rainfall dataset india 1901-2017.csv', index_col=[0])  # used for flood prediction
-
-data = pd.read_csv('rainfall dataset india 1901-2017.csv', index_col=[0])  # used for rainfall_analysis
-data.drop(['Jan-Feb', 'Mar-May', 'Jun-Sep', 'Oct-Dec', 'YEAR', 'ANNUAL', 'Flood'], axis=1,
-          inplace=True)  # used for rainfall_analysis
-
-# cleaning data for flood_prediction
+# used for flood prediction
+data1 = pd.read_csv('rainfall dataset india 1901-2017.csv', index_col=[0])
 data1.drop(['Jan-Feb', 'Mar-May', 'Jun-Sep', 'Oct-Dec', 'YEAR', 'ANNUAL'], axis=1,
-           inplace=True)  # used for flood prediction
+           inplace=True)
 data1['SUBDIVISION'] = data1['SUBDIVISION'].str.upper()
-from sklearn import preprocessing
-
 le = preprocessing.LabelEncoder()
 SUBDIVISION = le.fit_transform(data1.SUBDIVISION)
 data1['SUBDIVISION'] = SUBDIVISION
@@ -78,17 +57,24 @@ data1.dropna(inplace=True, axis=0)
 data1['Flood'].replace(['YES', 'NO'], [1, 0], inplace=True)
 x1 = data1.iloc[:, 0:13]
 y1 = data1.iloc[:, -1]
-from sklearn.model_selection import train_test_split
-
 x1_train, x1_test, y1_train, y1_test = train_test_split(x1, y1, test_size=0.2)
-from sklearn.linear_model import LogisticRegression
-
 lr = LogisticRegression()
 lr.fit(x1_train, y1_train)
 y_pred_lr = lr.predict(x1_test)
-from sklearn.metrics import accuracy_score
-
 print("\naccuracy score:%f" % (accuracy_score(y1_test, y_pred_lr) * 100))
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# used for rainfall_analysis
+data = pd.read_csv('rainfall dataset india 1901-2017.csv', index_col=[0])
+data.drop(['Jan-Feb', 'Mar-May', 'Jun-Sep', 'Oct-Dec', 'YEAR', 'ANNUAL', 'Flood'], axis=1,
+          inplace=True)
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# cleaning data for flood_prediction
+
+
 # from sklearn import preprocessing
 #
 # le = preprocessing.LabelEncoder()
@@ -315,6 +301,54 @@ def flood():
 def noflood():
     return render_template('noflood.html')
 
+
+@app.route("/rainfall_predict", methods=['POST', 'GET'])
+def rainfall_predict():
+    if request.method == 'POST':
+        day = request.form['day']
+        visibilityHigh = request.form['visibilityHigh']
+        visibilityAvg = request.form['visibilityAvg']
+        month = request.form['month']
+        tempHigh = request.form['tempHigh']
+        tempAvg = request.form['tempAvg']
+        visibilityLow = request.form['visibilityLow']
+        tempLow = request.form['tempLow']
+        windAvg = request.form['windAvg']
+        DPLow = request.form['DPLow']
+        DPHigh = request.form['DPHigh']
+        DPAvg = request.form['DPAvg']
+        humidityHigh = request.form['humidityHigh']
+        SLPHigh = request.form['SLPHigh']
+        SLPLow = request.form['SLPLow']
+        SLPAvg = request.form['SLPAvg']
+        humidityAvg = request.form['humidityAvg']
+        humidityLow = request.form['humidityLow']
+        month_dict = {
+            'January': 1,
+            'February': 2,
+            'March': 3,
+            'April': 4,
+            'May': 5,
+            'June': 6,
+            'July': 7,
+            'August': 8,
+            'September': 9,
+            'October': 10,
+            'November': 11,
+            'December': 12
+        }
+        out = lr_RP.predict(
+            [[float(month_dict[month]), float(day), float(tempHigh), float(tempAvg), float(tempLow), float(DPHigh),
+              float(DPAvg), float(DPLow), float(humidityHigh), float(humidityAvg), float(humidityLow),
+              float(SLPHigh), float(SLPAvg), float(SLPLow), float(visibilityHigh), float(visibilityAvg),
+              float(visibilityLow), float(windAvg)]])
+        out1 = float("%.2f" % out)
+        if out1 <= 0:
+            flash(str(0), 'info')
+        else:
+            flash(str(out1),'info')
+
+    return render_template('rainfall_predict.html')
 
 # -------------------------------------
 
