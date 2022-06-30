@@ -35,7 +35,7 @@ text-align:center;
 }
     </style>
 
-<div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 1550px 200px;background-repeat: no-repeat; height: 180px;">
+<div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 100% 200px;background-repeat: no-repeat; height: 180px;">
     <h1 style="color:white"><b>Flood Prediction</b></h1> <img class="logo" src="{{ url_for('static', filename='7.png')}}"  style="height:200px; width:250px;">
   
   </div>
@@ -54,79 +54,6 @@ text-align:center;
     </div>
 </div>
     <body style="background-image: url(static/cloud.jpg);background-repeat: no-repeat;">
-<!--<form method="POST" action="#">-->
-
-<!--    <label for="subdivision">Choose a Subdivision:</label>-->
-<!--  <select name="subdivision" id="subdivision" required>-->
-<!--      <option value="">Choose a Subdivision</option>-->
-<!--      <option value='ANDAMAN & NICOBAR ISLANDS'>ANDAMAN & NICOBAR ISLANDS</option>-->
-<!-- <option value='ARUNACHAL PRADESH'>ARUNACHAL PRADESH</option>-->
-<!-- <option value='ASSAM & MEGHALAYA'>ASSAM & MEGHALAYA</option>-->
-<!--<option value='BIHAR'>BIHAR</option>-->
-<!-- <option value='CHHATTISGARH'>CHHATTISGARH</option>-->
-<!-- <option value='COASTAL ANDHRA PRADESH'>COASTAL ANDHRA PRADESH</option>-->
-<!-- <option value='COASTAL KARNATAKA'>COASTAL KARNATAKA</option>-->
-<!--      <option value='EAST MADHYA PRADESH'>EAST MADHYA PRADESH</option>-->
-<!--<option value= 'EAST RAJASTHAN'>EAST RAJASTHAN</option>-->
-<!-- <option value='EAST UTTAR PRADESH'>EAST UTTAR PRADESH</option>-->
-<!-- <option value='GANGETIC WEST BENGAL'>GANGETIC WEST BENGAL</option>-->
-<!-- <option value='GUJARAT REGION'>GUJARAT REGION</option>-->
-<!-- <option value='HARYANA DELHI & CHANDIGARH'>HARYANA DELHI & CHANDIGARH</option>-->
-<!-- <option value='HIMACHAL PRADESH'>HIMACHAL PRADESH</option>-->
-<!-- <option value='JAMMU & KASHMIR'>JAMMU & KASHMIR</option>-->
-<!-- <option value='JHARKHAND'>JHARKHAND</option>-->
-<!-- <option value='KERALA'>KERALA</option>-->
-<!-- <option value='KONKAN & GOA'>KONKAN & GOA</option>-->
-<!-- <option value='LAKSHADWEEP'>LAKSHADWEEP</option>-->
-<!-- <option value='MADHYA MAHARASHTRA'>MADHYA MAHARASHTRA</option>-->
-<!-- <option value='MATATHWADA'>MATATHWADA</option>-->
-<!-- <option value='NAGA MANI MIZO TRIPURA'>NAGA MANI MIZO TRIPURA</option>-->
-<!-- <option value='NORTH INTERIOR KARNATAKA'>NORTH INTERIOR KARNATAKA</option>-->
-<!-- <option value='ORISSA'>ORISSA</option>-->
-<!-- <option value='PUNJAB'>PUNJAB</option>-->
-<!-- <option value='RAYALSEEMA'>RAYALSEEMA</option>-->
-<!-- <option value='SAURASHTRA & KUTCH'>SAURASHTRA & KUTCH</option>-->
-<!-- <option value='SOUTH INTERIOR KARNATAKA'>SOUTH INTERIOR KARNATAKA</option>-->
-<!-- <option value='SUB HIMALAYAN WEST BENGAL & SIKKIM'>SUB HIMALAYAN WEST BENGAL & SIKKIM</option>-->
-<!-- <option value='TAMIL NADU'>TAMIL NADU</option>-->
-<!-- <option value='TELANGANA'>TELANGANA</option>-->
-<!-- <option value='UTTARAKHAND'>UTTARAKHAND</option>-->
-<!-- <option value='VIDARBHA'>VIDARBHA</option>-->
-<!-- <option value='WEST MADHYA PRADESH'>WEST MADHYA PRADESH</option>-->
-<!-- <option value='WEST RAJASTHAN'>WEST RAJASTHAN</option>-->
-<!-- <option value='WEST UTTAR PRADESH'>WEST UTTAR PRADESH</option>-->
-<!--  </select>-->
-<!--    <br><br>-->
-<!--    <p>enter in mm</p>-->
-<!--  <label for="jan">Jan:</label>-->
-<!--  <input type="text" id="jan" name="jan" value="0"><br>-->
-<!--    <label for="feb">Feb:  </label>-->
-<!--  <input type="text" id="feb" name="feb" value="0"><br>-->
-<!--    <label for="Mar">Mar:  </label>-->
-<!--  <input type="text" id="Mar" name="Mar" value="0"><br>-->
-<!--    <label for="Apr">Apr:</label>-->
-<!--  <input type="text" id="Apr" name="Apr" value="0"><br>-->
-<!--    <label for="May">May:</label>-->
-<!--  <input type="text" id="May" name="May" value="0"><br>-->
-<!--    <label for="Jun">Jun:</label>-->
-<!--  <input type="text" id="Jun" name="Jun" value="0"><br>-->
-<!--    <label for="Jul">Jul:</label>-->
-<!--  <input type="text" id="Jul" name="Jul" value="0"><br>-->
-<!--    <label for="Aug">Aug:</label>-->
-<!--  <input type="text" id="Aug" name="Aug" value="0"><br>-->
-<!--    <label for="Sep">Sep:</label>-->
-<!--  <input type="text" id="Sep" name="Sep" value="0"><br>-->
-<!--    <label for="Oct">Oct:</label>-->
-<!--  <input type="text" id="Oct" name="Oct" value="0"><br>-->
-<!--    <label for="Nov">Nov:</label>-->
-<!--  <input type="text" id="Nov" name="Nov" value="0"><br>-->
-<!--    <label for="Dec">Dec:</label>-->
-<!--  <input type="text" id="Dec" name="Dec" value="0"><br>-->
-
-
-<!--    <br>-->
-<!--  <input type="submit" value="Submit">-->
-<!--</form>-->
 
 <section id="prediction-form">
         <form class="form" action="#", method="POST">
@@ -224,12 +151,6 @@ text-align:center;
                     <div class="md-form">
                         <label for="Sep">September</label>
                         <input type="text" id="Sep" name="Sep" class="form-control" value="0">
-                    </div>
-                </div>
-                <div class="col-md-6 my-2">
-                    <div class="md-form">
-                        <label for="humidity9am" class="humidity9am">Humidity 9am</label>
-                        <input type="text" class="form-control" id="humidity9am" name="humidity9am">
                     </div>
                 </div>
                 <div class="col-md-6 my-2">

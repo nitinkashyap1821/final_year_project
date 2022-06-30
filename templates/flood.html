@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <html>
 	<head>
 		<title>main</title>
@@ -21,10 +21,21 @@
     opacity: 1;
   }
 }
+th, td {
+  text-align: left;
+}
+tr{
+height: 10px;
+}
+
+table{
+margin-left: auto;
+  margin-right: auto;
+}
         </style>
 	</head>
 
-  <div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 1550px 200px;background-repeat: no-repeat; height: 140px;">
+  <div class="header" style="background-image: url(static/2.jpg); background-size:cover;background-size: 100% 200px;background-repeat: no-repeat; height: 140px;">
     <h1 style="color:white"><b>Flood Prediction</b></h1> <img class="logo" src="{{ url_for('static', filename='7.png')}}"  style="height:200px; width:250px;">
   
   </div>
@@ -43,26 +54,48 @@
 </div>
 <body style="background-image: url(static/cloud.jpg);background-repeat: no-repeat;">
 <br><br>
-<center>
+<div style="text-align:center;">
 <div class="blink"><img class="logo" src="{{ url_for('static', filename='1.jpg')}}"  style="height:200px; width:250px;"></div>
 <p> <h1>There is a high probablity of flood occurrence.</h1></p>
-<p><h2>Emergency Kit</h2>
+    <table>
+        <tr >
+    <td><h2>Emergency Kit</h2></td>
+  </tr>
+  <tr >
+    <td><li>Battery operated torch</td>
+  </tr>
+  <tr>
+    <td><li>Extra batteries</td>
+  </tr>
+  <tr>
+    <td><li>Battery operated radio</td>
+  </tr>
+  <tr>
+    <td><li>First aid kit and essential medicines</td>
+  </tr>
+        <tr>
+    <td><li>Emergency food and water</td>
+  </tr>
+        <tr>
+    <td><li>Candles and matches <br> in a waterproof container</td>
+  </tr>
+        <tr>
+    <td><li>Knife</td>
+  </tr>
+        <tr>
+    <td><li>Chlorine tablets or powdered water</td>
+  </tr>
+        <tr>
+    <td><li>Important documents</td>
+  </tr>
+           <tr>
+    <td><li>Thick ropes and cords</td>
+  </tr>
 
-<li>Battery operated torch</li><li>
-Extra batteries</li><li>
-Battery operated radio</li><li>
-First aid kit and essential medicines</li><li>
-Emergency food (dry items) and water (packed and sealed)</li><li>
-Candles and matches in a waterproof container</li><li>
-Knife</li><li>
-Chlorine tablets or powdered water</li><li>
-Important documents (Ration card, Voter ID card, Aadhar Card etc.)</li><li>
-Cash, Aadhar Card and Ration Card</li><li>
-Thick ropes and cords</li><li>
-Shoes</li>
-<br>
+</table>
+    <br>
 In case of emergency call helpline numbers which is available in <a href="/helpafterlogin">help</a> page of our website</p></center>
-
+</div>
 <script>
   window.onscroll = function() {myFunction()};
   
