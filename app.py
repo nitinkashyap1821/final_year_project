@@ -3,14 +3,15 @@ import json
 import os
 import sqlite3
 import warnings
-from sklearn.linear_model import LogisticRegression
 import pandas as pd
 import plotly
 import plotly.express as px
 from sklearn import preprocessing
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from flask import Flask, render_template, url_for, request, flash, redirect, session
 
 warnings.filterwarnings('ignore')
 # -------------------------------------------------model_code------------------------------------------------------------
@@ -58,10 +59,11 @@ data1['Flood'].replace(['YES', 'NO'], [1, 0], inplace=True)
 x1 = data1.iloc[:, 0:13]
 y1 = data1.iloc[:, -1]
 x1_train, x1_test, y1_train, y1_test = train_test_split(x1, y1, test_size=0.2)
-lr = LogisticRegression()
-lr.fit(x1_train, y1_train)
-y_pred_lr = lr.predict(x1_test)
-print("\naccuracy score:%f" % (accuracy_score(y1_test, y_pred_lr) * 100))
+
+svc = SVC(kernel='rbf', probability=True)
+svc_classifier = svc.fit(x1_train, y1_train)
+y_pred_svc = svc_classifier.predict(x1_test)
+print("\n accuracy score:%f" % (accuracy_score(y1_test, y_pred_svc) * 100))
 
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -72,39 +74,6 @@ data.drop(['Jan-Feb', 'Mar-May', 'Jun-Sep', 'Oct-Dec', 'YEAR', 'ANNUAL', 'Flood'
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-# cleaning data for flood_prediction
-
-
-# from sklearn import preprocessing
-#
-# le = preprocessing.LabelEncoder()
-#
-# SUBDIVISION = le.fit_transform(data_1.SUBDIVISION)
-# data_1['SUBDIVISION'] = SUBDIVISION
-#
-# data_1.dropna(inplace=True)
-#
-# data_1['Flood'].replace(['YES', 'NO'], [1, 0], inplace=True)
-# x1 = data_1.iloc[:, 0:14]
-#
-# y1 = data_1.iloc[:, -1]
-#
-# from sklearn.model_selection import train_test_split
-#
-# x1_train, x1_test, y1_train, y1_test = train_test_split(x1, y1, test_size=0.2)
-#
-# from sklearn.naive_bayes import GaussianNB
-#
-# clf_NB = GaussianNB()
-# clf_NB.fit(x1_train, y1_train)
-# y_pred_NB = clf_NB.predict(x1_test)
-#
-# from sklearn.metrics import accuracy_score
-#
-# print(accuracy_score(y_pred_NB, y1_test))
-# score_nb = accuracy_score(y_pred_NB, y1_test)
-
-from flask import Flask, render_template, url_for, request, flash, redirect, session
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '881e69e15e7a528830975467b9d87a98'
@@ -216,7 +185,6 @@ def user_register():
 def rainfall_analysis_predict():
     if request.method == 'POST':
         text = request.form['subdivision']
-        # return redirect(url_for("rainfall_graph",text=text))
         subDivision = data.loc[data['SUBDIVISION'] == text]
         subDivision = subDivision.mean()
 
@@ -229,66 +197,12 @@ def rainfall_analysis_predict():
         )
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('rainfall_graph.html', graphJSON=graphJSON)
-
     else:
         return render_template("rainfall_analysis_predict.html")
-
-    # day = request.form['day']
-    # visibilityHigh = request.form['visibilityHigh']
-    # visibilityAvg = request.form['visibilityAvg']
-    # month = request.form['month']
-    # tempHigh = request.form['tempHigh']
-    # tempAvg = request.form['tempAvg']
-    # visibilityLow = request.form['visibilityLow']
-    # tempLow = request.form['tempLow']
-    # windAvg = request.form['windAvg']
-    # DPLow = request.form['DPLow']
-    # DPHigh = request.form['DPHigh']
-    # DPAvg = request.form['DPAvg']
-    # humidityHigh = request.form['humidityHigh']
-    # SLPHigh = request.form['SLPHigh']
-    # SLPLow = request.form['SLPLow']
-    # SLPAvg = request.form['SLPAvg']
-    # humidityAvg = request.form['humidityAvg']
-    # humidityLow = request.form['humidityLow']
-    # global lr
-    # if request.method == 'POST':
-    #     out = lr.predict([[float(month), float(day), float(tempHigh), float(tempAvg), float(tempLow), float(DPHigh),
-    #                        float(DPAvg), float(DPLow), float(humidityHigh), float(humidityAvg), float(humidityLow),
-    #                        float(SLPHigh), float(SLPAvg), float(SLPLow), float(visibilityHigh), float(visibilityAvg),
-    #                        float(visibilityLow), float(windAvg)]])
-    #     out1 = float("%.2f" % out)
-    #     # out(0, abs(out[0]))
-    #     if out1 <= 0:
-    #         flash(f'The Rainfall  is 0mm')
-    #     else:
-    #         flash(f'The Rainfall  is {out1}mm')
-    #     # return out
-    #     # output.delete(0, END)
-    #     # output.insert(0, abs(out[0]))
-    #     return render_template('user_account.html')
 
 
 # --------------------------------------rainfall_analysis_prediction------------------------------
 
-# --------------------------------------rainfall_analysis_graph-----------------------------
-# @app.route("/rainfall_graph/<txt>")
-# def rainfall_graph(text):
-#     subDivision = data.loc[data['SUBDIVISION'] == text]
-#     subDivision = subDivision.mean()
-#
-#     fig = px.bar(subDivision, x=subDivision.index, y=subDivision.values)
-#     fig.update_layout(
-#         title="Plot Title",
-#         xaxis_title="X Axis Title",
-#         yaxis_title="X Axis Title",
-#         legend_title="Legend Title",
-#     )
-#     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-#     return render_template('rainfall_graph.html', graphJSON=graphJSON)
-
-
-# --------------------------------------rainfall_analysis_graph------------------------------
 
 # ------------------------------------predict_page-----------------------------------------------------------------
 
@@ -346,9 +260,10 @@ def rainfall_predict():
         if out1 <= 0:
             flash(str(0), 'info')
         else:
-            flash(str(out1),'info')
+            flash(str(out1), 'info')
 
     return render_template('rainfall_predict.html')
+
 
 # -------------------------------------
 
@@ -407,7 +322,7 @@ def predict():
               'LAKSHADWEEP': 18}
         print(SUBDIVISION)
 
-        out = lr.predict(
+        out = svc_classifier.predict(
             [[sd[SUBDIVISION], float(JAN), float(FEB), float(MAR), float(APR), float(MAY), float(JUN), float(JUL),
               float(AUG), float(SEP), float(OCT), float(NOV), float(DEC)]])
         if out[0] == 0:
@@ -415,36 +330,6 @@ def predict():
         else:
             return redirect(url_for('flood'))
     return render_template("predict.html")
-    # SUBDIVISION = request.form['SUBDIVISION']
-    # YEAR = request.form['YEAR']
-    # JAN = request.form['JAN']
-    # FEB = request.form['FEB']
-    # MAR = request.form['MAR']
-    # APR = request.form['APR']
-    # MAY = request.form['MAY']
-    # JUN = request.form['JUN']
-    # JUL = request.form['JUL']
-    # AUG = request.form['AUG']
-    # SEP = request.form['SEP']
-    # OCT = request.form['OCT']
-    # NOV = request.form['NOV']
-    # DEC = request.form['DEC']
-    # out = clf_NB.predict([[float(SUBDIVISION), float(YEAR), float(JAN), float(FEB), float(MAR), float(APR),
-    #                        float(MAY), float(JUN), float(JUL), float(AUG), float(SEP), float(OCT),
-    #                        float(NOV), float(DEC)]])
-    # print(out)
-    # if out[0] == 1:
-    #     # s = print('Yes floods in {}')
-    #     # print(s.format(SUBDIVISION))
-    #     flash(f'Yes')
-    #     return render_template('index.html')
-    #
-    # else:
-    #     print('No')
-    #     flash(f'No')
-    #     return render_template('noFlood.html')
-    #
-    # return render_template('flood.html')
 
 
 @app.route("/user_account")
